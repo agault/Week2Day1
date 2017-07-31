@@ -1,5 +1,6 @@
 var https = require('https');
 
+
 var options = {
   host: 'sytantris.github.io',
   path: '/http-examples/step3.html'
@@ -11,14 +12,18 @@ function getAndPrintHTML (options) {
 
     response.setEncoding('utf8');
 
-    var empty = ""
+    var buffer = ""
+
     response.on('data', function (chunk) {
-    console.log(`${chunk}${'\n'}`);
-
-        empty += chunk
-        console.log(empty)
-
+      // console.log(`${chunk}${'\n'}`);
+      buffer += chunk
     });
+
+    response.on('end', function() {
+      console.log(buffer);
+    })
+
+
   });
 
 
